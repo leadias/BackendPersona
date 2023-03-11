@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using APITODOLIST.Models;
+using APIPRUEBAS.Models;
 using Microsoft.AspNetCore.Cors;
 using System.Data;
 
 
 
-namespace APITODOLIST.Controllers
+namespace APIPRUEBAS.Controllers
 {
 
     [EnableCors("ReglasCors")]
@@ -26,25 +26,26 @@ namespace APITODOLIST.Controllers
 
         public IActionResult GetLists(int idList)
         {
-
-            DataTable lists = new DataTable();
-
-            lists = _dbcontext.getList(idList);
-            var listsItem = (from row in lists.AsEnumerable()
-                         select new List()
-                         {
-                             IdList = int.Parse(row["idList"].ToString()),
-                             IdItem = int.Parse(row["IdItem"].ToString()),
-                             name = row["Name"].ToString()
-                         }).ToList();
-
             try
             {
+                DataTable lists = new DataTable();
+
+                lists = _dbcontext.getList(idList);
+                var listsItem = (from row in lists.AsEnumerable()
+                                 select new List()
+                                 {
+                                     IdList = int.Parse(row["idList"].ToString()),
+                                     IdItem = int.Parse(row["IdItem"].ToString()),
+                                     name = row["Name"].ToString()
+                                 }).ToList();
+
                 return StatusCode(StatusCodes.Status200OK, new { mensaje = "ok", response = listsItem });
+               
+
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = ex.Message, response = listsItem });
+                return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = ex.Message, response = "error obteniendo lista" });
 
 
             }

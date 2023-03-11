@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace APITODOLIST.Models
+namespace APIPRUEBAS.Models
 {
     public partial class List
     {

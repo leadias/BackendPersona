@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace APITODOLIST.Models
+namespace APIPRUEBAS.Models
 {
     public class Jwt
     {

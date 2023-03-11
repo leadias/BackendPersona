@@ -1,10 +1,10 @@
-﻿using System;
+﻿
 using System.Data;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace APITODOLIST.Models
+namespace APIPRUEBAS.Models
 {
     public partial class DBAPIContext : DbContext
     {
