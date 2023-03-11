@@ -4,7 +4,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace APIPRUEBAS.Models
+namespace APITODOLIST.Models
 {
     public partial class DBAPIContext : DbContext
     {

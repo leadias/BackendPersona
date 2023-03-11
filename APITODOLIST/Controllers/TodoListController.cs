@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using APIPRUEBAS.Models;
+using APITODOLIST.Models;
 using Microsoft.AspNetCore.Cors;
 using System.Data;
 
 
-namespace APIPRUEBAS.Controllers
+
+namespace APITODOLIST.Controllers
 {
 
     [EnableCors("ReglasCors")]
