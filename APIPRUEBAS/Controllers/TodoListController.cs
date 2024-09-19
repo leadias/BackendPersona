@@ -20,54 +20,23 @@ namespace APIPRUEBAS.Controllers
             _dbcontext = _context;
         }
 
-        [HttpGet]
-        [Route("getList")]
 
-        public IActionResult GetLists()
+        [HttpGet]
+        [Route("getList/{idList:int}")]
+
+        public IActionResult GetLists(int idList)
         {
             try
             {
                 DataTable lists = new DataTable();
 
-                lists = _dbcontext.getList();
+                lists = _dbcontext.getList(idList);
                 var listsItem = (from row in lists.AsEnumerable()
                                  select new List()
                                  {
-                                     IdCargo = int.Parse(row["id_cargo"].ToString()),
-                                     name = row["nombre"].ToString()
-                                 }).ToList();
-
-                return StatusCode(StatusCodes.Status200OK, new { mensaje = "ok", response = listsItem });
-
-
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = ex.Message, response = "error obteniendo lista" });
-
-
-            }
-        }
-
-
-        [HttpGet]
-        [Route("getListEmployee")]
-
-        public IActionResult GetListEmployees()
-        {
-            try
-            {
-                DataTable lists = new DataTable();
-
-                lists = _dbcontext.getListEmployees();
-                var listsItem = (from row in lists.AsEnumerable()
-                                 select new Employee()
-                                 {
-                                     Id = int.Parse(row["ID"].ToString()),
-                                     identification = int.Parse(row["identification"].ToString()),
-                                     date = DateTime.Parse(row["date"].ToString()),
-                                     name = row["Name"].ToString(),
-                                     position = int.Parse(row["position"].ToString()),
+                                     IdList = int.Parse(row["idList"].ToString()),
+                                     IdItem = int.Parse(row["IdItem"].ToString()),
+                                     name = row["Name"].ToString()
                                  }).ToList();
 
                 return StatusCode(StatusCodes.Status200OK, new { mensaje = "ok", response = listsItem });
@@ -84,7 +53,7 @@ namespace APIPRUEBAS.Controllers
 
         [HttpPost]
         [Route("Store")]
-        public IActionResult Store([FromBody] Employee objeto) {
+        public IActionResult Store([FromBody] List objeto) {
 
             try
             {
@@ -102,9 +71,9 @@ namespace APIPRUEBAS.Controllers
 
         [HttpPut]
         [Route("Edit")]
-        public IActionResult Edit([FromBody] Employee objeto)
+        public IActionResult Edit([FromBody] List objeto)
         {
-            Employee list = _dbcontext.list.Find(objeto.Id);
+            List list = _dbcontext.list.Find(objeto.IdItem);
 
             if (list == null)
             {
@@ -115,9 +84,9 @@ namespace APIPRUEBAS.Controllers
             try
             {
                 list.name = objeto.name is null ? list.name : objeto.name;
-                list.identification = objeto.identification is 0 ? list.identification : objeto.identification;
-                list.date = objeto.date;
-                list.position = objeto.position is 0 ? list.identification : objeto.identification;
+
+
+
 
                 _dbcontext.list.Update(list);
                 _dbcontext.SaveChanges();
@@ -138,7 +107,7 @@ namespace APIPRUEBAS.Controllers
         [Route("Delete/{idItem:int}")]
         public IActionResult Delete(int idItem) {
 
-            Employee list = _dbcontext.list.Find(idItem);
+            List list = _dbcontext.list.Find(idItem);
 
             if (list == null)
             {
@@ -155,6 +124,7 @@ namespace APIPRUEBAS.Controllers
             }
             catch (Exception ex)
             {
+
                 return StatusCode(StatusCodes.Status400BadRequest, new { mensaje = ex.Message });
             }
 

@@ -5,7 +5,8 @@ namespace APIPRUEBAS.Models
 {
     public partial class List
     {
-        public int IdCargo { get; set; }
+        public int IdList { get; set; }
+        public int IdItem { get; set; }
         public string? name { get; set; }
 
 
