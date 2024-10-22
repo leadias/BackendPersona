@@ -9,7 +9,7 @@
   },
   "$schema": "https://json.schemastore.org/launchsettings.json",
   "profiles": {
-    "APITODOLIST": {
+    "Pactia": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",

@@ -18,17 +18,17 @@ namespace APIPRUEBAS.Models
         {
         }
 
-        public virtual DbSet<List> list { get; set; } = null!;
-        private string connetion = "Server=(local); DataBase=ToDoListBD;Integrated Security=true";
+        public virtual DbSet<Persona> persona { get; set; } = null!;
+        private string connetion = "Server=(local); DataBase=pactia;Integrated Security=true";
         SqlDataReader leer;
         DataTable tabla = new DataTable();
 
 
-        public DataTable getList(int IdList)
+        public DataTable getList()
         {
             SqlConnection conexion = new SqlConnection(connetion);
             conexion.Open();
-            string cadena = "select * from items where idList=" + IdList;
+            string cadena = "select * from personas";
             SqlCommand comando = new SqlCommand(cadena, conexion);
             leer = comando.ExecuteReader();
             tabla.Load(leer);
@@ -46,19 +46,28 @@ namespace APIPRUEBAS.Models
         {
 
 
-            modelBuilder.Entity<List>(entity =>
+            modelBuilder.Entity<Persona>(entity =>
             {
-                entity.HasKey(e => e.IdItem)
+                entity.HasKey(e => e.Cedula)
                     .HasName("PK__");
 
-                entity.ToTable("items");
+                entity.ToTable("personas");
 
-                entity.Property(e => e.name)
+                entity.Property(e => e.Cedula)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+
+                entity.Property(e => e.Nombre)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+               entity.Property(e => e.Apellido)
+                .HasMaxLength(50)
+                .IsUnicode(false);
 
-                entity.Property(e => e.IdList).HasColumnType("int(10, 2)");
+                entity.Property(e => e.Celular)
+                 .HasMaxLength(50)
+                 .IsUnicode(false);
 
             });
 
