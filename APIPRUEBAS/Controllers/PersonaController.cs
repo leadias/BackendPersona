@@ -86,6 +86,8 @@ namespace APIPRUEBAS.Controllers
             try
             {
                 persona.Nombre = objeto.Nombre is null ? persona.Nombre : objeto.Nombre;
+                persona.Apellido = objeto.Apellido is null ? persona.Apellido : objeto.Apellido;
+                persona.Celular = objeto.Celular is null ? persona.Celular : objeto.Celular;
 
 
 
